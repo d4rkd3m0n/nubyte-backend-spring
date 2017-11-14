@@ -28,7 +28,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "OLTPTIPO")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Oltptipo.findAll", query = "SELECT o FROM Oltptipo o")
     , @NamedQuery(name = "Oltptipo.findByIdtipo", query = "SELECT o FROM Oltptipo o WHERE o.idtipo = :idtipo")

@@ -6,28 +6,24 @@
 package com.nubyte.services.rest;
 
 
-import Logica.FacadeAppMovilRemote;
-import java.sql.Date;
+
 import java.util.ArrayList;
-import java.util.List;
-import javax.ejb.EJB;
-import javax.jws.WebService;
-import javax.jws.Oneway;
-import javax.jws.WebMethod;
+
 import javax.jws.WebParam;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nubyte.model.oltp.Oltpcliente;
+import com.nubyte.logica.FacadeAppMovil;
+import com.nubyte.logica.FacadeLogin;
+import com.nubyte.logica.FacadePedirInfo;
+import com.nubyte.logica.FacadeReserva;
 
 /**
  *
@@ -39,7 +35,7 @@ import com.nubyte.model.oltp.Oltpcliente;
 @ComponentScan("com.nubyte.model")
 public class WebServiceREST {
 
-
+	/*
     @Autowired
     private FacadeAppMovilRemote facadeAppMovil;
 
@@ -60,7 +56,7 @@ public class WebServiceREST {
     @Consumes("application/json")
     @Path("/create")
     public void create(Oltpcliente oltpcliente) {
-        ejbRef.create(oltpcliente);
+        create(oltpcliente);
     }
 
     @POST
@@ -98,8 +94,13 @@ public class WebServiceREST {
     @GET
     public int count() {
         return ejbRef.count();
-    }
-
+    }*/
+	
+	FacadeLogin facadeLogin;
+	FacadePedirInfo facadePedirInfo;
+	FacadeAppMovil facadeAppMovil;
+	FacadeReserva facadeReserva;
+	
     /**
      * Web service operation
      */
