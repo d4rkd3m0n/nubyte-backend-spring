@@ -9,7 +9,6 @@ package com.nubyte.services.rest;
 
 import java.util.ArrayList;
 
-import javax.jws.WebParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
@@ -275,7 +274,7 @@ public class WebServiceREST {
      */
     @POST
     @Path("/asignarPuntos")
-    public String asignarPuntos(@WebParam(name = "cedula") String cedula, @WebParam(name = "puntos") String puntos) {
+    public String asignarPuntos(@HeaderParam("cedula") String cedula, @HeaderParam("puntos") String puntos) {
         //TODO write your implementation code here:
         return facadePedirInfo.asignarPuntos(cedula, puntos);
     }
@@ -285,7 +284,7 @@ public class WebServiceREST {
      */
     @POST
     @Path("/pedirPuntos")
-    public String pedirPuntos(@WebParam(name = "correo") String cedula) {
+    public String pedirPuntos(@HeaderParam("correo") String cedula) {
         //TODO write your implementation code here:
         String retorno = facadeAppMovil.pedirPuntos(cedula);
         System.out.println("Puntos: "+retorno);
