@@ -72,7 +72,7 @@ public class FacadeLogin{
         for (Oltpcliente cliente : clientes) {
             if(cliente.getCorreo().equals(correo)){
                 if(cliente.getContrasena().equals(pass)){
-                    retorno=cliente.getNombrecliente();
+                    retorno=cliente.getCorreo();
                 }
             }else{
                 System.out.println("Usuario no encontrado");

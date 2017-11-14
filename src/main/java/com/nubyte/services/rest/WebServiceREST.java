@@ -15,6 +15,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -95,10 +96,13 @@ public class WebServiceREST {
     public int count() {
         return ejbRef.count();
     }*/
-	
+	@Autowired
 	private FacadeLogin facadeLogin;
+	@Autowired
 	private FacadePedirInfo facadePedirInfo;
+	@Autowired
 	private FacadeAppMovil facadeAppMovil;
+	@Autowired
 	private FacadeReserva facadeReserva;
 	
     /**
@@ -220,12 +224,12 @@ public class WebServiceREST {
     /**
      * Web service operation
      */
-    @POST
-    @Path("/crearCuentaApp")
-    public boolean crearCuentaApp(@HeaderParam("correo") String correo, @HeaderParam("contrasena") String pass) {
+    @RequestMapping(value="/crearCuentaApp",method=RequestMethod.POST)
+    public boolean crearCuentaApp(@HeaderParam("correo") String correo, @HeaderParam("contrasena") String contrasena) {
         //TODO write your implementation code here:
         //return facadeAppMovil.registrarUsuario(correo, nombre, cedula, pass, fechaNacimiento, genero);
-    	return true;
+    	System.out.println("Entro a crear cuenta app");
+    	return facadeAppMovil.registrarUsuario(correo, contrasena);
     }
 
     /**

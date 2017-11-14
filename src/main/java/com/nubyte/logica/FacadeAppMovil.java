@@ -69,6 +69,35 @@ public class FacadeAppMovil {
         } 
         
     }
+    public boolean registrarUsuario(String correo, String pass){
+        BigDecimal ced = new BigDecimal(123456);
+        boolean retorno = false; 
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        int anio = 0;
+        Date fechanacimiento = new Date();
+        
+        /*try {
+            fechanacimiento = dateFormat.parse(fechaNacimiento);
+            anio = fechanacimiento.getYear();
+        } catch (ParseException ex) {
+            Logger.getLogger(FacadeAppMovil.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        String generacion = calcularGeneracion(anio);
+        String datestring=dateFormat.format(fechanacimiento);
+        System.out.println( datestring );
+        //String generoAux = codigoGenero(genero);
+        Oltpcliente cl = new Oltpcliente(ced, pass, correo);
+        try{
+            System.out.println("cliente "+cl.getCorreo()+" "+cl.getContrasena()+" "+cl.getCedula());
+            oltpclienteFacade.save(cl);
+            retorno = true;
+            System.out.println("resultado "+retorno);
+            return retorno;
+        }catch(Exception e){
+            return retorno;
+        } 
+        
+    }
     private String codigoGenero(String genero){
         String retorno = "";
         if(genero.equals("Masculino"))

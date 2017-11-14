@@ -46,37 +46,30 @@ public class Oltpcliente {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @Basic(optional = false)
-    @NotNull
+    @Basic
     @Column(name = "CEDULA")
     private BigDecimal cedula;
-    @Basic(optional = false)
-    @NotNull
+    @Basic
     @Size(min = 1, max = 50)
     @Column(name = "NOMBRECLIENTE")
     private String nombrecliente;
-    @Basic(optional = false)
-    @NotNull
+    @Basic
     @Column(name = "FECHANACIMIENTO")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechanacimiento;
-    @Basic(optional = false)
-    @NotNull
+    @Basic
     @Size(min = 1, max = 20)
     @Column(name = "CONTRASENA")
     private String contrasena;
-    @Basic(optional = false)
-    @NotNull
+    @Basic
     @Size(min = 1, max = 50)
     @Column(name = "CORREO")
     private String correo;
-    @Basic(optional = false)
-    @NotNull
+    @Basic
     @Size(min = 1, max = 1)
     @Column(name = "GENERO")
     private String genero;
-    @Basic(optional = false)
-    @NotNull
+    @Basic
     @Size(min = 1, max = 10)
     @Column(name = "GENERACION")
     private String generacion;
@@ -85,7 +78,14 @@ public class Oltpcliente {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "oltpcliente")
     private List<Oltpcompra> oltpcompraList;
 
-    public Oltpcliente() {
+    public Oltpcliente(BigDecimal cedula, String contrasena, String correo) {
+		super();
+		this.cedula = cedula;
+		this.contrasena = contrasena;
+		this.correo = correo;
+	}
+
+	public Oltpcliente() {
     }
 
     public Oltpcliente(BigDecimal cedula) {
