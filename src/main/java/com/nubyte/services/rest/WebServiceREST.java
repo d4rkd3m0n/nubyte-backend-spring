@@ -17,6 +17,8 @@ import javax.ws.rs.Produces;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nubyte.logica.FacadeAppMovil;
@@ -31,7 +33,6 @@ import com.nubyte.logica.FacadeReserva;
 
 @CrossOrigin
 @RestController
-@ComponentScan("com.nubyte.model")
 public class WebServiceREST {
 
 	/*
@@ -95,16 +96,17 @@ public class WebServiceREST {
         return ejbRef.count();
     }*/
 	
-	FacadeLogin facadeLogin;
-	FacadePedirInfo facadePedirInfo;
-	FacadeAppMovil facadeAppMovil;
-	FacadeReserva facadeReserva;
+	private FacadeLogin facadeLogin;
+	private FacadePedirInfo facadePedirInfo;
+	private FacadeAppMovil facadeAppMovil;
+	private FacadeReserva facadeReserva;
 	
     /**
      * Web service operation
      */
     @POST
     @Path("/login")
+    
     public String login(@HeaderParam("correo") String correo, @HeaderParam("pass") String pass) {
         //TODO write your implementation code here:
         return facadeLogin.login(correo, pass);
@@ -178,9 +180,8 @@ public class WebServiceREST {
     /**
      * Web service operation
      */
-    @GET
-    @Produces("application/json")
-    @Path("/perdirInfoSegmentacion")
+
+    @RequestMapping(value="/perdirInfoSegmentacion",method=RequestMethod.GET, produces="application/json")
     public ArrayList<String> pedirInfoSegmentacion() {
         //TODO write your implementation code here:
         ArrayList<String> retorno = facadePedirInfo.pedirInfoSegmentacion();
@@ -193,8 +194,14 @@ public class WebServiceREST {
     /**
      * Web service operation
      */
-    @POST
-    @Path("/loginAPP")
+
+    @RequestMapping(value="/loginAPP2",method=RequestMethod.GET)
+    public String loginApp2() {
+        //TODO write your implementation code here:
+        return "funciona";
+        }
+        
+    @RequestMapping(value="/loginAPP",method=RequestMethod.POST, produces="text/plain")
     public String loginApp(@HeaderParam("correo") String correo, @HeaderParam("contrasena") String contrasena) {
         //TODO write your implementation code here:
         return facadeLogin.loginUsuario(correo, contrasena);
@@ -203,11 +210,22 @@ public class WebServiceREST {
     /**
      * Web service operation
      */
+//    @POST
+//    @Path("/crearCuentaApp")
+//    public boolean crearCuentaApp(@HeaderParam("correo") String correo, @HeaderParam("nombre") String nombre, @HeaderParam("cedula") String cedula, @HeaderParam("pass") String pass, @HeaderParam("fechaNacimiento") String fechaNacimiento, @HeaderParam("genero") String genero) {
+//        //TODO write your implementation code here:
+//        //return facadeAppMovil.registrarUsuario(correo, nombre, cedula, pass, fechaNacimiento, genero);
+//    	return true;
+//    }
+    /**
+     * Web service operation
+     */
     @POST
     @Path("/crearCuentaApp")
-    public boolean crearCuentaApp(@HeaderParam("correo") String correo, @HeaderParam("nombre") String nombre, @HeaderParam("cedula") String cedula, @HeaderParam("pass") String pass, @HeaderParam("fechaNacimiento") String fechaNacimiento, @HeaderParam("genero") String genero) {
+    public boolean crearCuentaApp(@HeaderParam("correo") String correo, @HeaderParam("contrasena") String pass) {
         //TODO write your implementation code here:
-        return facadeAppMovil.registrarUsuario(correo, nombre, cedula, pass, fechaNacimiento, genero);
+        //return facadeAppMovil.registrarUsuario(correo, nombre, cedula, pass, fechaNacimiento, genero);
+    	return true;
     }
 
     /**

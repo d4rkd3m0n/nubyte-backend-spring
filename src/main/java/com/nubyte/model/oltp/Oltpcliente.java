@@ -31,8 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Joako
  */
 @Entity
-@Table(name = "OLTPCLIENTE")
-@NamedQueries({
+/*@NamedQueries({
     @NamedQuery(name = "Oltpcliente.findAll", query = "SELECT o FROM Oltpcliente o")
     , @NamedQuery(name = "Oltpcliente.findByCedula", query = "SELECT o FROM Oltpcliente o WHERE o.cedula = :cedula")
     , @NamedQuery(name = "Oltpcliente.findByNombrecliente", query = "SELECT o FROM Oltpcliente o WHERE o.nombrecliente = :nombrecliente")
@@ -41,8 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Oltpcliente.findByCorreo", query = "SELECT o FROM Oltpcliente o WHERE o.correo = :correo")
     , @NamedQuery(name = "Oltpcliente.findByGenero", query = "SELECT o FROM Oltpcliente o WHERE o.genero = :genero")
     , @NamedQuery(name = "Oltpcliente.findByGeneracion", query = "SELECT o FROM Oltpcliente o WHERE o.generacion = :generacion")
-    , @NamedQuery(name = "Oltpcliente.findByPuntos", query = "SELECT o FROM Oltpcliente o WHERE o.puntos = :puntos")})
-public class Oltpcliente implements Serializable {
+    , @NamedQuery(name = "Oltpcliente.findByPuntos", query = "SELECT o FROM Oltpcliente o WHERE o.puntos = :puntos")})*/
+public class Oltpcliente {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
