@@ -301,11 +301,10 @@ public class WebServiceREST {
     /**
      * Web service operation
      */
-    @POST
-    @Path("/pedirPuntos")
-    public String pedirPuntos(@HeaderParam("correo") String cedula) {
+    @RequestMapping(value="/pedirPuntos",method=RequestMethod.POST)
+    public String pedirPuntos(@HeaderParam("correo") String correo) {
         //TODO write your implementation code here:
-        String retorno = facadeAppMovil.pedirPuntos(cedula);
+        String retorno = facadeAppMovil.pedirPuntos(correo);
         System.out.println("Puntos: "+retorno);
         return retorno;
     }
