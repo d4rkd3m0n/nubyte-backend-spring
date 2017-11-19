@@ -5,6 +5,9 @@
  */
 package com.nubyte.logica;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
@@ -13,11 +16,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.nubyte.model.oltp.Oltpcliente;
+import com.nubyte.model.oltp.Oltpestableci;
 import com.nubyte.model.oltp.Oltpfuncio;
 import com.nubyte.model.oltp.OltpfuncioPK;
 import com.nubyte.model.oltp.Oltpproducto;
 import com.nubyte.model.oltp.Oltppromos;
 import com.nubyte.repositories.oltp.OltpclienteRepository;
+import com.nubyte.repositories.oltp.OltpestableciRepository;
 import com.nubyte.repositories.oltp.OltpfuncioRepository;
 import com.nubyte.repositories.oltp.OltpproductoRepository;
 import com.nubyte.repositories.oltp.OltppromosRepository;
@@ -46,6 +51,8 @@ import com.rapidminer.report.Reportable;
 import com.rapidminer.tools.PlatformUtilities;
 //import com.rapidminer.operator.io.ExcelExampleSource;
 import com.rapidminer.tools.XMLException;
+
+
 import java.nio.file.Paths;
 import java.util.List;
 import com.rapidminer.license.AlreadyRegisteredException;
@@ -71,6 +78,9 @@ public class FacadePedirInfo {
 
     @Autowired
     private OltpfuncioRepository oltpfuncioFacade;
+    
+    @Autowired
+    private OltpestableciRepository oltpestablecimiento;
  
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -214,26 +224,33 @@ public class FacadePedirInfo {
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
-    public ArrayList<String> listaProductos(String nit){
-        int contador = 0;
+    public String listaProductos(String nit){
         List<Oltpproducto> aux = oltpproductoFacade.findAll();
-        ArrayList<String> retorno = new ArrayList<>();
-            for (Oltpproducto oltpproducto : aux) {
-            //List<Oltpestableci> oltpestableciList = oltpproducto.getOltpestableciList();
-                //System.out.println("size"+oltpestableciList.size());
-                //for (Oltpestableci oltpestableci : oltpestableciList) {
-                    //if(oltpestableci.getNit().equals(nit) && contador<10){
-                    if(contador<10){
-                        String prod = "";
-                        //prod = oltpproducto.getOltpproductoPK().getCodigoproducto()+"/"+oltpproducto.getNombreprod()+"/"+oltpproducto.getPrecio();
-                        prod = oltpproducto.getOltpproductoPK().getCodigoproducto()+"/"+oltpproducto.getNombreprod();
-                        retorno.add(prod);
-                    }
-                    contador ++;
-                    System.out.println("contador: "+contador);
-                //}
-            }
-        return retorno;
+        List<Oltpestableci> auxEst = oltpestablecimiento.findAll();
+        JSONArray retorno = new JSONArray();
+        for (Oltpestableci oltpestablecimientoAux : auxEst) {
+			if(oltpestablecimientoAux.getNit().equals(nit)) {
+		
+	            for (Oltpproducto oltpproducto : aux) {
+            	   try {
+            		   
+            			JSONObject item = new JSONObject();
+           				item.put("nombre", oltpproducto.getNombreprod());
+           				item.put("id", oltpproducto.getId());
+           	            item.put("marca", oltpproducto.getMarca());
+           	            item.put("volumen", oltpproducto.getVolumen());
+           	            item.put("precio", oltpproducto.getPrecio());
+           	            retorno.put(item);
+           	            System.out.println("prod "+item);
+            		   
+           			} catch (JSONException e) {
+           				// TODO Auto-generated catch block
+           				e.printStackTrace();
+           			}
+	            }
+			}
+        }
+        return retorno.toString();
     }
     public ArrayList<String> listaPromos(String nit){
         ArrayList<String> retorno = new ArrayList<>();

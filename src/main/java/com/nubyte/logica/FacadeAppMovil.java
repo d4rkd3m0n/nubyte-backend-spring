@@ -16,12 +16,16 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nubyte.model.oltp.Oltpcliente;
 import com.nubyte.model.oltp.Oltpestableci;
 import com.nubyte.repositories.oltp.OltpclienteRepository;
 import com.nubyte.repositories.oltp.OltpestableciRepository;
+
 
 
 /**
@@ -121,16 +125,33 @@ public class FacadeAppMovil {
         }
         return generacion;
     }
-    public ArrayList<String> mostrarEstablecimientos(){
-        Vector<Oltpestableci> est = new Vector<>();
-        ArrayList<String> retorno = new ArrayList<>();
-        est =  (Vector<Oltpestableci>) oltpestableciFacade.findAll();
+    public String mostrarEstablecimientos(){
+        List<Oltpestableci> est = new ArrayList<>();
+        JSONArray retorno = new JSONArray();
+        est =  oltpestableciFacade.findAll();
         for (Oltpestableci oltpestableci : est) {
-            String value = "";
-            value = value + oltpestableci.getNombre()+" "+oltpestableci.getDireccion();
-            retorno.add(value);
+            /*String value = "";
+            value += "{nombre:"+ oltpestableci.getNombre()+" "+oltpestableci.getDireccion();
+            retorno.add(value);*/
+
+            try {
+                JSONObject item = new JSONObject();
+				item.put("nombre", oltpestableci.getNombre());
+				item.put("id", oltpestableci.getNit());
+	            item.put("direccion", oltpestableci.getDireccion());
+	            item.put("latitud", oltpestableci.getLatitud());
+	            item.put("longitud", oltpestableci.getLongitud());
+	            item.put("latitud", oltpestableci.getLatitud());
+	            retorno.put(item);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
+            
+
         }
-        return retorno;
+        return retorno.toString();
     }
     public String pedirPuntos(String correo){
         correo = correo.replaceAll("\\s","");

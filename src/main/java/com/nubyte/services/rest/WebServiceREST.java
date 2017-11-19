@@ -8,6 +8,7 @@ package com.nubyte.services.rest;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -15,6 +16,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,6 +28,7 @@ import com.nubyte.logica.FacadeAppMovil;
 import com.nubyte.logica.FacadeLogin;
 import com.nubyte.logica.FacadePedirInfo;
 import com.nubyte.logica.FacadeReserva;
+import com.nubyte.model.oltp.Oltpestableci;
 
 /**
  *
@@ -185,7 +188,7 @@ public class WebServiceREST {
      * Web service operation
      */
 
-    @RequestMapping(value="/perdirInfoSegmentacion",method=RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="/perdirInfoSegmentacion",method=RequestMethod.GET)//, produces="application/json")
     public ArrayList<String> pedirInfoSegmentacion() {
         //TODO write your implementation code here:
         ArrayList<String> retorno = facadePedirInfo.pedirInfoSegmentacion();
@@ -235,16 +238,12 @@ public class WebServiceREST {
     /**
      * Web service operation
      */
-    @GET
-    @Produces("application/json")
-    @Path("/listarEstablecimientos")
-    public ArrayList<String> listarEstablecimientos() {
+    @RequestMapping(value="/listarEstablecimientos",method=RequestMethod.GET, produces="application/json")
+    public String listarEstablecimientos() {
         //TODO write your implementation code here:
-        ArrayList<String> retorno = facadeAppMovil.mostrarEstablecimientos();
-        for (String string : retorno) {
-            System.out.println("retorno "+string);
-        }
-        return retorno;
+        String retorno = facadeAppMovil.mostrarEstablecimientos();
+        System.out.println("Entra a listarEstablecimientos");
+        return retorno.toString();
     }
 
     /**
@@ -252,15 +251,13 @@ public class WebServiceREST {
      * @param nit
      * @return 
      */
-    @POST
-    @Produces("application/json")
-    @Path("/listaProductosEst")
-    public ArrayList<String> listaProductosEst(@HeaderParam("nit") String nit) {
+
+    @RequestMapping(value="/listaProductosEst",method=RequestMethod.POST, produces="application/json")
+    public String listaProductosEst(@HeaderParam("id") String id) {
+    	System.out.println("id "+id);
         //TODO write your implementation code here:
-        ArrayList<String> retorno = facadePedirInfo.listaProductos(nit);
-        for (String string : retorno) {
-            System.out.println("retorno "+string);
-        }
+        String retorno = facadePedirInfo.listaProductos(id);
+        System.out.println("Entro a listar productos"+retorno);
         return retorno;
     }
 

@@ -55,6 +55,10 @@ public class Oltpproducto implements Serializable {
     private double precio;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "ID")
+    private double id;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 8)
     @Column(name = "VOLUMEN")
     private String volumen;
@@ -155,8 +159,16 @@ public class Oltpproducto implements Serializable {
     public void setOltptipo(Oltptipo oltptipo) {
         this.oltptipo = oltptipo;
     }
+    
+    public double getId() {
+		return id;
+	}
 
-    @Override
+	public void setId(double id) {
+		this.id = id;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (oltpproductoPK != null ? oltpproductoPK.hashCode() : 0);
