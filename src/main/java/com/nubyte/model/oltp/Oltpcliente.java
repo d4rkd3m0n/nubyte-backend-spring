@@ -75,6 +75,8 @@ public class Oltpcliente {
     private String generacion;
     @Column(name = "PUNTOS")
     private BigInteger puntos;
+    @Column(name = "TELEFONO")
+    private BigInteger telefono;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "oltpcliente")
     private List<Oltpcompra> oltpcompraList;
 
@@ -175,7 +177,15 @@ public class Oltpcliente {
         this.oltpcompraList = oltpcompraList;
     }
 
-    @Override
+    public BigInteger getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(BigInteger telefono) {
+		this.telefono = telefono;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (cedula != null ? cedula.hashCode() : 0);

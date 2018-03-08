@@ -33,7 +33,23 @@ public class FacadeLogin{
 	@Autowired
 	OltpclienteRepository oltpclienteRepository;
 	
-    public String login(String correo, String pass){
+    /*public String login(String correo, String pass){
+	    String retorno = "-1";
+	    List<Oltpfuncio> clientes = oltpfuncioRepository.findAll();
+	    for (Oltpfuncio cliente : clientes) {
+	        if(cliente.getCorreo().equals(correo)){
+	            if(cliente.getContrasena().equals(pass)){
+	                retorno=cliente.getNombrefunc()+" "+cliente.getOltprol().getIdrol()+" "+cliente.getOltpfuncioPK().getOltpestableciNit();
+	            }
+	        }else{
+	            System.out.println("Usuario no encontrado");
+	        }
+	    }
+	    System.out.println("retornoCliente: "+retorno);
+	    return retorno;
+	}
+     */
+	public String login(String correo, String pass){
         String retorno = "-1";
         List<Oltpfuncio> clientes = oltpfuncioRepository.findAll();
         for (Oltpfuncio cliente : clientes) {

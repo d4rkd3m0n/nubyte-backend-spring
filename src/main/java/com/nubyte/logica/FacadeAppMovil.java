@@ -44,13 +44,14 @@ public class FacadeAppMovil {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 
-    public boolean registrarUsuario(String correo, String nombre, String cedula, String pass, String fechaNacimiento, String genero){
-        BigDecimal ced = new BigDecimal(cedula);
+    public boolean registrarUsuario(String correo, String pass, String nombres, String telefono){
+        BigDecimal ced = new BigDecimal(123456);
         boolean retorno = false; 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         int anio = 0;
         Date fechanacimiento = new Date();
-        
+        String fechaNacimiento = "12/06/1991";
+        String genero = "M";
         try {
             fechanacimiento = dateFormat.parse(fechaNacimiento);
             anio = fechanacimiento.getYear();
@@ -61,7 +62,7 @@ public class FacadeAppMovil {
         String datestring=dateFormat.format(fechanacimiento);
         System.out.println( datestring );
         String generoAux = codigoGenero(genero);
-        Oltpcliente cl = new Oltpcliente(ced, nombre, fechanacimiento, pass, correo, generoAux, generacion);
+        Oltpcliente cl = new Oltpcliente(ced, nombres, fechanacimiento, pass, correo, generoAux, generacion);
         try{
             System.out.println("cliente "+cl.getGeneracion()+" "+cl.getGenero()+" "+cl.getFechanacimiento().toString()+" "+cl.getCedula());
             oltpclienteFacade.save(cl);

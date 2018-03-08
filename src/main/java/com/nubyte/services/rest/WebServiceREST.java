@@ -228,11 +228,11 @@ public class WebServiceREST {
      * Web service operation
      */
     @RequestMapping(value="/crearCuentaApp",method=RequestMethod.POST)
-    public boolean crearCuentaApp(@HeaderParam("correo") String correo, @HeaderParam("contrasena") String contrasena) {
+    public boolean crearCuentaApp(@HeaderParam("correo") String correo, @HeaderParam("contrasena") String contrasena, @HeaderParam("nombres") String nombres, @HeaderParam("telefono") String telefono) {
         //TODO write your implementation code here:
         //return facadeAppMovil.registrarUsuario(correo, nombre, cedula, pass, fechaNacimiento, genero);
     	System.out.println("Entro a crear cuenta app");
-    	return facadeAppMovil.registrarUsuario(correo, contrasena);
+    	return facadeAppMovil.registrarUsuario(correo, contrasena, nombres, telefono);
     }
 
     /**
