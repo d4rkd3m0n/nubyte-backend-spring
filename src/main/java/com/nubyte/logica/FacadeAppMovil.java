@@ -50,7 +50,7 @@ public class FacadeAppMovil {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         int anio = 0;
         Date fechanacimiento = new Date();
-        String fechaNacimiento = "12/06/1991";
+        String fechaNacimiento = "1991-06-12";
         String genero = "M";
         try {
             fechanacimiento = dateFormat.parse(fechaNacimiento);
