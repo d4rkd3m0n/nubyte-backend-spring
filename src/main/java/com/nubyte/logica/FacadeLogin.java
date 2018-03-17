@@ -90,7 +90,7 @@ public class FacadeLogin{
         for (Oltpcliente cliente : clientes) {
             if(cliente.getCorreo().equals(correo)){
                 if(cliente.getContrasena().equals(pass)){
-                    retorno=cliente.getPuntos().toString();
+                    retorno=cliente.getNombrecliente();
                 }
             }else{
                 System.out.println("Usuario no encontrado");
@@ -101,4 +101,19 @@ public class FacadeLogin{
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+    public String obtenerPuntos(String correo){
+        String retorno = "-1";
+        correo = correo.replaceAll("\\s","");
+        System.out.println("puntos para: "+correo);
+        List<Oltpcliente> clientes = oltpclienteRepository.findAll();
+        for (Oltpcliente cliente : clientes) {
+            if(cliente.getCorreo().equals(correo)){
+            	retorno=cliente.getPuntos().toString();
+            }else{
+                System.out.println("Usuario no encontrado");
+            }
+        }
+        System.out.println("retornoApp: "+retorno);
+        return retorno;
+    }
 }

@@ -213,6 +213,12 @@ public class WebServiceREST {
         //TODO write your implementation code here:
         return facadeLogin.loginUsuario(correo, contrasena);
     }
+    
+    @RequestMapping(value="/obtenerPuntos",method=RequestMethod.POST, produces="text/plain")
+    public String loginApp(@HeaderParam("correo") String correo) {
+        //TODO write your implementation code here:
+        return facadeLogin.obtenerPuntos(correo);
+    }
 
     /**
      * Web service operation
